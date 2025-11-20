@@ -1,0 +1,44 @@
+{
+  "Comment": "Image processing workflow",
+  "StartAt": "ProcessImage",
+  "States": {
+    "ProcessImage": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:ca-central-1:269372836149:function:imageProcessorV1",
+      "Next": "CheckResult",
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "Next": "LogFailure"
+        }
+      ]
+    },
+    "CheckResult": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.status",
+          "StringEquals": "success",
+          "Next": "LogSuccess"
+        }
+      ],
+      "Default": "LogFailure"
+    },
+    "LogSuccess": {
+      "Type": "Pass",
+      "Result": {
+        "message": "Image processed successfully"
+      },
+      "End": true
+    },
+    "LogFailure": {
+      "Type": "Pass",
+      "Result": {
+        "message": "Image processing failed"
+      },
+      "End": true
+    }
+  }
+}
