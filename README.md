@@ -59,6 +59,9 @@ Lambda (Image Resize)  Lambda (Metadata/Validation)
 ## API Endpoint
 `https://63u3x8ga69.execute-api.ca-central-1.amazonaws.com/process`
 
+## Step Function ARN
+`arn:aws:states:ca-central-1:269372836149:stateMachine:ImageProcessingWorkflow` 
+
 ## License
 MIT
 
@@ -82,6 +85,8 @@ curl -X POST https://63u3x8ga69.execute-api.ca-central-1.amazonaws.com/process \
 
 You can check Step Functions execution history to verify success and inspect logs in CloudWatch.
 
-3. Check your S3 output bucket `image-output-dev-269372836149` to see the resized image created.
+3. Check your S3 output bucket `image-output-dev-269372836149` to see the resized image created (example_thumb.jpg).
+
+This confirms that the Serverless Image Processing Pipeline works well.
 
 
